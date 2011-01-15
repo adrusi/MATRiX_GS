@@ -1,0 +1,320 @@
+@import "grid";
+$container-width: 960px;
+$column-count: 12;
+$column-margin: 20px;
+$_span: 1;
+$_border-width: 0;
+$_border-left: 0;
+$_border-right: 0;
+$_border-style: outset;
+$_left-padding: 0;
+$_right-padding: 0;
+$_prepend: 0;
+$_append: 0;
+$_shift: 0;
+@include init;
+
+// STYLES HERE
+
+body {
+  font: {
+    family: "Helvetica Neue", Helvetica, sans-serif;
+    size: 62.5%;
+    weight: 400;
+  };
+  text-rendering: optimizeLegibility;
+}
+
+#container { 
+  @include container(rgba(0,0,0,0.15));
+  margin-top: 50px;
+  margin-bottom: 50px;
+  line-height: 1.5em;
+  font-size: 1.4em;
+}
+
+span {
+  background: #444444;
+  display: block;
+  color: white;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+p {
+  $span: 10;
+  $prepend: 1;
+  $append: 1;
+  @include grid;
+  text-align: justify;
+}
+
+pre {
+  $span: 10;
+  $prepend: 1;
+  $append: 1;
+  @include grid;
+}
+
+h3 {
+  $span: 12;
+  $prepend: 1;
+  $append: 1;
+  @include grid;
+  text-align: center;
+}
+
+h1 {
+  $span: 12;
+  @include grid;
+  position: relative;
+  font-size: 36px;
+  line-height: 48px;
+  text-align: center;
+  background: #444444;
+  color: white;
+  margin-top: 5px;
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  $span: 12;
+  @include grid;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  text-align: center;
+  border-top: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+  background: white;
+}
+
+#span-1 {
+  @include grid;
+}
+
+#span-11 {
+  $span: 11;
+  @include grid;
+}
+
+#span-2 {
+  $span: 2;
+  @include grid;
+}
+
+#span-10 {
+  $span: 10;
+  @include grid;
+}
+
+#span-3 {
+  $span: 3;
+  @include grid;
+}
+
+#span-9 {
+  $span: 9;
+  @include grid;
+}
+
+#span-4 {
+  $span: 4;
+  @include grid;
+}
+
+#span-8 {
+  $span: 8;
+  @include grid;
+}
+
+#span-5 {
+  $span: 5;
+  @include grid;
+}
+
+#span-7 {
+  $span: 7;
+  @include grid;
+}
+
+#span-6, #span-6-2 {
+  $span: 6;
+  @include grid;
+}
+
+#append-1 {
+  $span: 6;
+  $append: 1;
+  @include grid;
+}
+
+#append-1-2 {
+  $span: 5;
+  @include grid;
+}
+
+#append-2 {
+  $span: 6;
+  $append: 2;
+  @include grid;
+}
+
+#append-2-2 {
+  $span: 4;
+  @include grid;
+}
+
+#append-3 {
+  $span: 6;
+  $append: 3;
+  @include grid;
+}
+
+#append-3-2 {
+  $span: 3;
+  @include grid;
+}
+
+#prepend-1-2, #prepend-2-2, #prepend-3-2 {
+  $span: 6;
+  @include grid;
+}
+
+#prepend-1 {
+  $span: 5;
+  $prepend: 1;
+  @include grid;
+}
+
+#prepend-2 {
+  $span: 4;
+  $prepend: 2;
+  @include grid;
+}
+
+#prepend-3 {
+  $span: 3;
+  $prepend: 3;
+  @include grid;
+}
+
+#shift-1 {
+  $span: 3;
+  $shift: 9;
+  @include grid;
+}
+
+#shift-1-2 {
+  $span: 9;
+  $shift: -3;
+  @include grid;
+}
+
+#shift-2 {
+  $span: 4;
+  $shift: 8;
+  @include grid;
+}
+
+#shift-2-2 {
+  $span: 8;
+  $shift: -4;
+  @include grid;
+}
+
+#shift-3 {
+  $span: 5;
+  $shift: 7;
+  @include grid;
+}
+
+#shift-3-2 {
+  $span: 7;
+  $shift: -5;
+  @include grid;
+}
+
+#outset-1 {
+  $span: 6;
+  $border-width: 10px;
+  @include grid;
+  border: 10px solid #888888;
+}
+
+#outset-3, #outset-4 {
+  $span: 6;
+  $border-width: 9px;
+  @include grid;
+  border: 9px solid #888888;
+}
+
+#outset-2, #inset-2 {
+  $span: 6;
+  @include grid;
+  margin-bottom: 25px;
+}
+
+#inset-1 {
+  $span: 6;
+  $border-width: 10px;
+  $border-style: inset;
+  @include grid;
+  border: 10px solid #888888;
+}
+
+#inset-3, #inset-4 {
+  $span: 6;
+  $border-width: 9px;
+  $border-style: inset;
+  @include grid;
+  border: 9px solid #888888;
+}
+
+#padding-1 {
+  $span: 5;
+  $right-padding: 1;
+  @include grid;
+}
+
+#padding-3 {
+  $span: 3;
+  $left-padding: 3;
+  @include grid;
+}
+
+#padding-2, #padding-4 {
+  $span: 6;
+  @include grid;
+}
+
+#pb-1 {
+  $span: 5;
+  $right-padding: 2;
+  $border-width: 5px;
+  @include grid;
+  border: 5px solid #888888;
+}
+
+#pb-2 {
+  $span: 5;
+  @include grid;
+  margin-bottom: 10px;
+}
+
+#pb-3 {
+  $span: 7;
+  $right-padding: 2;
+  $border-style: inset;
+  $border-width: 5px;
+  @include grid;
+  border: 5px solid #888888;
+}
+
+#pb-4 {
+  $span: 3;
+  @include grid;
+  margin-bottom: 10px;
+}
