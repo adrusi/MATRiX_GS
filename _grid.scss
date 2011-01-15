@@ -1,0 +1,235 @@
+$span: 1;
+$border-width: 0;
+$border-left: 0;
+$border-right: 0;
+$border-style: outset;
+$left-padding: 0;
+$right-padding: 0;
+$prepend: 0;
+$append: 0;
+$shift: 0;
+
+@mixin init($reset: reset) {
+  $_span: 1 !default;
+  $_border-width: 0 !default;
+  $_border-left: 0 !default;
+  $_border-right: 0 !default;
+  $_border-style: outset !default;
+  $_left-padding: 0 !default;
+  $_right-padding: 0 !default;
+  $_prepend: 0 !default;
+  $_append: 0 !default;
+  $_shift: 0 !default;
+  
+  $span: $_span;
+  $border-left: $_border-left;
+  $border-right: $_border-right;
+  $border-style: $_border-style;
+  $left-padding: $_left-padding;
+  $right-padding: $_right-padding;
+  $prepend: $_prepend;
+  $append: $_append;
+  $shift: $_shift;
+  
+  @if $reset == reset {
+    html, body, div, span, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    abbr, address, cite, code,
+    del, dfn, em, img, ins, kbd, q, samp,
+    small, strong, sub, sup, var,
+    b, i,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, figcaption, figure, 
+    footer, header, hgroup, menu, nav, section, summary,
+    time, mark, audio, video {
+        margin:0;
+        padding:0;
+        border:0;
+        outline:0;
+        font-size:100%;
+        vertical-align:baseline;
+        background:transparent;
+    }
+
+    body {
+        line-height:1;
+    }
+
+    article,aside,details,figcaption,figure,
+    footer,header,hgroup,menu,nav,section { 
+        display:block;
+    }
+
+    nav ul {
+        list-style:none;
+    }
+
+    blockquote, q {
+        quotes:none;
+    }
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content:'';
+        content:none;
+    }
+
+    a {
+        margin:0;
+        padding:0;
+        font-size:100%;
+        vertical-align:baseline;
+        background:transparent;
+    }
+
+    /* change colours to suit your needs */
+    ins {
+        background-color:#ff9;
+        color:#000;
+        text-decoration:none;
+    }
+
+    /* change colours to suit your needs */
+    mark {
+        background-color:#ff9;
+        color:#000; 
+        font-style:italic;
+        font-weight:bold;
+    }
+
+    del {
+        text-decoration: line-through;
+    }
+
+    abbr[title], dfn[title] {
+        border-bottom:1px dotted;
+        cursor:help;
+    }
+
+    table {
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+
+    /* change border colour to suit your needs */
+    hr {
+        display:block;
+        height:1px;
+        border:0;   
+        border-top:1px solid #cccccc;
+        margin:1em 0;
+        padding:0;
+    }
+
+    input, select {
+        vertical-align:middle;
+    }
+  }
+}
+
+@mixin container($show-grid: no) {
+  width: $container-width;
+  margin: 0 auto;
+  position: relative;
+  left: -10px;
+  @if $show-grid != no {
+    background-image: -webkit-gradient(linear, left center, right center,
+      from(rgba(0,0,0,0)),
+      color-stop(100% - ((($container-width / $column-count) - $column-margin) / ($column-margin + (($container-width / $column-count) - $column-margin)) * 100%), rgba(0,0,0,0)),
+      color-stop(100% - ((($container-width / $column-count) - $column-margin) / ($column-margin + (($container-width / $column-count) - $column-margin)) * 100%), $show-grid),
+      to($show-grid)
+    );
+    background-image: -moz-repeating-linear-gradient(center left,
+      transparent,
+      transparent (1 - ((($container-width / $column-count) - $column-margin) / ($column-margin + (($container-width / $column-count) - $column-margin)))) * ($container-width / $column-count),
+      $show-grid (1 - ((($container-width / $column-count) - $column-margin) / ($column-margin + (($container-width / $column-count) - $column-margin)))) * ($container-width / $column-count),
+      $show-grid $container-width / $column-count
+    );
+    -webkit-background-size: $container-width / $column-count;
+    &:after {
+      content: ".";
+      height: 0;
+      font-size: 0;
+      visibility: hidden;
+      display: block;
+      clear: both;
+    }
+  }
+}
+
+@mixin grid($first: "") {
+  $width: $span * $container-width / $column-count - $column-margin;
+  $margin-left: $column-margin + ($prepend * $container-width / $column-count);
+  $margin-right: $append * $container-width / $column-count;
+  $padding-left: $left-padding * $container-width / $column-count;
+  $padding-right: $right-padding * $container-width / $column-count;
+  @if $border-width != 0 {
+    @if $border-left == $_border-left { $border-left: $border-width; }
+    @if $border-right == $_border-right { $border-right: $border-width; }
+  }
+  @if $border-style == inset {
+    @if $padding-left >= $border-left {
+      $padding-left: $padding-left - $border-left;
+    }
+    @else {
+      $width: $width - $border-left;
+    }
+    @if $padding-right >= $border-right {
+      $padding-right: $padding-right - $border-right;
+    }
+    @else {
+      $width: $width - $border-right;
+    }
+  }
+  @else {
+    $margin-left: $margin-left - $border-left;
+    $margin-right: $margin-right - $border-right;
+  }
+  @if $shift != 0 {
+    position: relative;
+    left: $shift * $container-width / $column-count;
+  }
+  @if $first == first  {
+    $margin-left: $margin-left - $column-margin;
+  }
+  float: left;
+  width: $width;
+  @if $margin-left != 0px { margin-left: $margin-left; }
+  @if $margin-right != 0px { margin-right: $margin-right; }
+  @if $padding-left != 0px { padding-left: $padding-left; }
+  @if $padding-right != 0px { padding-right: $padding-right; }
+  *display: inline;
+  $span: $_span;
+  $border-width: $_border-width;
+  $border-left: $_border-left;
+  $border-right: $_border-right;
+  $border-style: $_border-style;
+  $left-padding: $_left-padding;
+  $right-padding: $_right-padding;
+  $prepend: $_prepend;
+  $append: $_append;
+  $shift: $_shift;
+}
+/*
+Copyright (c) 2011 Adrian Sinclair
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
