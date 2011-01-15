@@ -1,5 +1,9 @@
-LICENSE
-=======
+Browser Support
+===============
+The background grid works only in Mozilla and Webkit-based browsers (it uses CSS3 gradients since the width of columns and margins can vary). Everything else has been tested in Internet Explorer 6, Opera 10, Webkit and Mozilla (FF2+) and has worked in every tested browser.
+
+License (MIT-Style)
+===================
 Copyright (c) 2011 Adrian Sinclair
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
